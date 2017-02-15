@@ -1,0 +1,56 @@
+
+<!--
+  Things to change:
+    - action (done!)
+    - hidden input patch (done!)
+    - pre-filled values
+    - submit button
+-->
+
+<% if action == :edit %>
+  <% action_url = cat_url(cat) %>
+  <% submit_name = "Edit" %>
+<% else %>
+  <% action_url = cats_url %>
+  <% submit_name = "Create" %>
+<% end %>
+
+<form action=" <%= action_url %> " method="post">
+
+  <% if action == :edit %>
+    <input type="hidden" name="_method" value="PATCH">
+  <% end %>
+
+  <label for="name">Name</label>
+  <input type="text" name="cat[name]" value=" <%= @cat.name %> " id="name"/>
+  <br />
+  <label for="birth_date">Birth date</label>
+  <input type="date" name="cat[birth_date]" value="<%= @cat.birth_date %>">
+  <br />
+  <label for="color">Color</label>
+  <select name="cat[color]" id="color">
+    <option disabled <%= @cat.color == nil ? "selected" : "" %> >Select a color</option>
+    <option value="white" <%= @cat.color == "white" ? "selected" : "" %> >White</option>
+    <option value="black" <%= @cat.color == "black" ? "selected" : "" %> >Black</option>
+    <option value="brown" <%= @cat.color == "brown" ? "selected" : "" %> >Brown</option>
+    <option value="calico" <%= @cat.color == "calico" ? "selected" : "" %> >Calico</option>
+    <option value="grey" <%= @cat.color == "grey" ? "selected" : "" %> >Grey</option>
+    <option value="siamese" <%= @cat.color == "siamese" ? "selected" : "" %> >Siamese</option>
+    <option value="cow" <%= @cat.color == "cow" ? "selected" : "" %> >Cow</option>
+    <option value="orange" <%= @cat.color == "orange" ? "selected" : "" %> >Orange</option>
+  </select>
+  <br>
+
+  <label for="male_cat">Male</label>
+  <input type="radio" <%= @cat.sex == 'M' ? "checked" : "" %> name="cat[sex]" value="M" id="male_cat">
+
+  <label for="female_cat">Female</label>
+  <input type="radio" <%= @cat.sex == 'F' ? "checked" : "" %> name="cat[sex]" value="F", id="female_cat">
+  <br />
+
+  <label for="description">Description<br />
+    <textarea name="cat[description]" rows="8" cols="80"> <%= @cat.description %> </textarea>
+  </label>
+  <br />
+  <input type="submit" value="<%= submit_name %> a Kitty!">
+</form>

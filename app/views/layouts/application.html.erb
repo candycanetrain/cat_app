@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CatsApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li> <%= link_to "All cats", cats_url %> </li>
+      <li> <%= link_to "Rent a cat", new_cat_rental_request_url %> </li>
+    </ul>
+  </nav>
+
+<%= yield %>
+
+</body>
+</html>
